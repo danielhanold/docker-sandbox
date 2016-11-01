@@ -60,5 +60,13 @@ RUN curl https://drupalconsole.com/installer -o /usr/local/bin/drupal && \
 COPY cli_php.ini /etc/php5/cli/php.ini
 COPY fpm_php.ini /etc/php5/fpm/php.ini
 
+# Create work dir
+RUN mkdir -p /var/www/html && \
+    chown -R www-data:www-data /var/www
+
+WORKDIR /var/www/html
+VOLUME /var/www/html
+EXPOSE 9000
+
 # Use exec version to login to instance (for now, TODO)
 CMD ["/bin/bash"]
