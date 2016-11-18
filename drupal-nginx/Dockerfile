@@ -27,5 +27,8 @@ WORKDIR /var/www/html
 # Expose HTTP and HTTPS ports
 EXPOSE 80 443
 
-# Use exec version to login to instance (for now, TODO)
-CMD ["/bin/bash"]
+# Try executing an entrypoint file on launch.
+# In entrypoint, run NGINX process in foreground to
+# ensure the container doesn't stop after being launched.
+# @see http://stackoverflow.com/questions/24241292/dockerized-nginx-is-not-starting
+CMD ["nginx", "-g", "daemon off;"]
