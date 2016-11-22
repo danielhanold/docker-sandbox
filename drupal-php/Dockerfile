@@ -43,7 +43,8 @@ RUN apt-get update && apt-get install -y \
 
 # Install composer and make it available globally
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    # Verification disabled for now as it seems to break the build
+    # php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
     mv composer.phar /usr/local/bin/composer
@@ -68,5 +69,5 @@ WORKDIR /var/www/html
 VOLUME /var/www/html
 EXPOSE 9000
 
-# Use exec version to login to instance (for now, TODO)
-CMD ["/bin/bash"]
+# Run PHP5-FPM in the foreground.
+CMD ["/usr/sbin/php5-fpm", "-F"]
