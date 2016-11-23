@@ -60,6 +60,8 @@ RUN curl https://drupalconsole.com/installer -o /usr/local/bin/drupal && \
 # Copy configs
 COPY cli_php.ini /etc/php5/cli/php.ini
 COPY fpm_php.ini /etc/php5/fpm/php.ini
+# Replace www.conf with sed modifications at a later point
+COPY www.conf /etc/php5/fpm/pool.d/www.conf
 
 # Create work dir
 RUN mkdir -p /var/www/html && \
