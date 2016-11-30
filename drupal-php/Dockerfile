@@ -67,6 +67,14 @@ COPY www.conf /etc/php5/fpm/pool.d/www.conf
 RUN mkdir -p /var/www/html && \
     chown -R www-data:www-data /var/www
 
+# Create files directory in order to set permissions
+# correctly. We will mount a data-only container
+# in this location.
+RUN mkdir -p /var/www/html/files && \
+    touch /var/www/html/files/dummy.txt && \
+    chown -R 1000:33 /var/www/html/files && \
+    chmod -R 0770 /var/www/html/files
+
 WORKDIR /var/www/html
 VOLUME /var/www/html
 EXPOSE 9000
