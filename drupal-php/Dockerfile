@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     htop \
     mysql-client \
+    imagemagick \
 
     # PHP Packages
     php5 \
