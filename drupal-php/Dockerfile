@@ -42,6 +42,11 @@ RUN apt-get update && apt-get install -y \
     php-apc \
     php5-apcu
 
+# Install SSMTP and modify configuration to use Mailhog on port 1025.
+RUN apt-get update && \
+    apt-get install ssmtp && \
+    sed -i 's/^mailhub=mail*/mailhub=mailhog:1025/' /etc/ssmtp/ssmtp.conf
+
 # Install composer and make it available globally
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     # Verification disabled for now as it seems to break the build
