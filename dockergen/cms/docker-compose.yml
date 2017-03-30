@@ -5,10 +5,12 @@ services:
     container_name: cms
     environment:
       - VIRTUAL_HOST=local.cms.dnainfo.com
+    networks:
+      - dnainfo
 
 networks:
     # Connect all services to the dnainfo network,
     # which needs to exists before this is launched.
-    default:
-        external:
-            name: dnainfo
+    dnainfo:
+      external: true
+

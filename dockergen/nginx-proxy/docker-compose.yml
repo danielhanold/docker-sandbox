@@ -13,6 +13,5 @@ services:
 networks:
     # Connect all services to the dnainfo network,
     # which needs to exists before this is launched.
-    default:
-        external:
-            name: dnainfo
+    dnainfo:
+      external: true

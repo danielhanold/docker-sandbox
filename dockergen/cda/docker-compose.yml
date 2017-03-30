@@ -1,14 +1,16 @@
 version: '2'
 services:
-  cms:
+  cda:
     image: jwilder/whoami
     container_name: cda
     environment:
       - VIRTUAL_HOST=local.dnainfo.com
+    networks:
+      - dnainfo
 
 networks:
     # Connect all services to the dnainfo network,
     # which needs to exists before this is launched.
-    default:
-        external:
-            name: dnainfo
+    dnainfo:
+      external: true
+
