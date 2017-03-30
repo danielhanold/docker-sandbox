@@ -1,0 +1,18 @@
+version: '2'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    networks:
+      - dnainfo
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+networks:
+    # Connect all services to the dnainfo network,
+    # which needs to exists before this is launched.
+    default:
+        external:
+            name: dnainfo
