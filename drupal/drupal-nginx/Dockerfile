@@ -21,10 +21,10 @@ COPY fastcgi_params /etc/nginx/fastcgi_params
 COPY drupal.conf /etc/nginx/conf.d/drupal.conf
 COPY test.txt /var/www/html/test.txt
 
-# Set the workdirectory
+# Set the workdirectory.
 WORKDIR /var/www/html
 
-# Expose HTTP and HTTPS ports
+# Expose HTTP and HTTPS ports.
 EXPOSE 80 443
 
 # Try executing an entrypoint file on launch.
